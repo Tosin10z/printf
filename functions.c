@@ -29,9 +29,9 @@ int print_char(va_list types, char buffer[],
  * Return: Number of chars printed
  */
 int print_string(va_list types, char buffer[],
-		int flags, int width, int precise, int size)
+		int flags, int width, int precision, int size)
 {
-	int length = 0,i;
+	int length = 0, i;
 	char *str = va_arg(types, char *);
 
 	UNUSED(buffer);
@@ -50,7 +50,7 @@ int print_string(va_list types, char buffer[],
 		length++;
 
 	if (precision >= 0 && precision < length)
-	       lenth = precision;
+		length = precision;
 
 if (width > length)
 {
@@ -83,7 +83,7 @@ return (write(1, str, length));
  * @size: size specifier
  * Return: Number of chars printed
  */
-int print_percent(va_list, types, char buffer[],
+int print_percent(va_list types, char buffer[],
 		int flags, int width, int precision, int size)
 {
 	UNUSED(types);
@@ -92,7 +92,7 @@ int print_percent(va_list, types, char buffer[],
 	UNUSED(width);
 	UNUSED(precision);
 	UNUSED(size);
-      return (write(1, "%%", 1));
+	return (write(1, "%%", 1));
 }
 
 /**
@@ -105,7 +105,8 @@ int print_percent(va_list, types, char buffer[],
  * @size: size specification
  * Return: Number of chars printed
  */
-int print_int(va_list, types, char buffer[], int flags, int width, int precision, int size)
+int print_int(va_list types, char buffer[],
+	int flags, int width, int precision, int size)
 {
 	int i = BUFF_SIZE - 2;
 	int is_negative = 0;
@@ -181,10 +182,3 @@ int print_binary(va_list types, char buffer[],
 	}
 	return (count);
 }
-
-
-
-
-
-
-
